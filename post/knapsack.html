@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Knapsack Problem Backtracking Demo</title>
+
+    
+    
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/main-23344ecd.css" />
+    <link href="../prism.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/knapsack.css" />
+    
+    
+
+<meta name=viewport content="width=device-width, initial-scale=1">
+
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-73893959-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script src="../prism.js"></script>
+<script src="/js/knapsack.js" defer></script>
+
+    
+</head>
+
+<nav class="fixed-nav-bar">
+<ul>
+    <li><a href="/">Home</a></li>
+    <li class="wide"></li>
+    <li><a href="/about/about.html">About</a></li>
+    <li><a href="/contact/contact.html">Contact</a></li>
+</ul>
+</nav>
+
+
+<body>
+<div id="cover-container">
+    <div id="front-cover">
+        <h1>Knapsack Problem Backtracking Demo</h1>
+    </div>
+</div>
+
+    <section class="section-content">
+
+    
+
+    
+
+<p>A visualization and explanation of how a backtracking algorithm searches for a solution to a problem.</p>
+<h1>Let's Steal</h1>
+        <div class="cardContainer">
+            <div class="card">
+                <label for="items">Number of<br>Items</label> <br>
+                <input type="text" id="items">
+
+            </div>
+            <div class="card">
+                <label for="weight">Weight of<br>Items</label> <br>
+                <input type="text" id="weight">
+            </div>
+            <div class="card">
+                <label for="values">Values of<br>Items</label> <br>
+                <input type="text" id="values">
+            </div>
+            <div class="card">
+                <label for="capacity">Knapsack<br>Capacity</label> <br>
+                <input type="text" id="capacity">
+            </div>
+        </div>
+        <div class="card result" id="result">
+            <label for="res">Result</label> <br>
+            <input type="text" id="res">
+            <input type="text" id="allItems">
+            <br>
+            <br>
+        </div>
+<pre>
+    <code class="language-python">
+     
+    def knapsack_backtracking(weights, values, capacity):
+        """
+        Solves the knapsack problem using backtracking.
+    
+        :param weights: A list of item weights.
+        :param values: A list of item values.
+        :param capacity: The maximum capacity of the knapsack.
+        :return: The maximum value that can be obtained.
+        """
+        n = len(weights)
+        max_val = 0
+    
+        def backtrack(i, curr_weight, curr_val):
+            nonlocal max_val
+            if i == n or curr_weight == capacity:
+                if curr_val > max_val:
+                    max_val = curr_val
+                return
+            if curr_weight + weights[i] <= capacity:
+                backtrack(i + 1, curr_weight + weights[i], curr_val + values[i])
+            backtrack(i + 1, curr_weight, curr_val)
+    
+        backtrack(0, 0, 0)
+        return max_val
+    </code>
+    </pre>
+    
+<h1 id="n-queens-problem">Knapsack problem</h1>
+
+<p>If I have a knapsack of capacity <strong>c</strong> and <strong>n</strong> items with their weights and values given, how can I fill the knapsack to maximize the total value of the items inside without exceeding the capacity?</p>
+
+
+
+<h2 id="what-would-the-algorithm-do-without-backtracking">What would the algorithm do without backtracking?</h2>
+
+<p>Without backtracking, a naive approach to solve the Knapsack problem would be to generate all possible subsets of the items and calculate the total value and weight of each subset. The algorithm would then compare the total weight of each subset with the capacity of the knapsack to determine if it is feasible. Among the feasible subsets, the algorithm would then select the one with the highest total value as the optimal solution.</p>
+
+<p>However, this approach would be inefficient as the number of possible subsets increases exponentially with the number of items, making it impractical for large instances of the Knapsack problem.</p>
+
+<h2 id="introducing-backtracking">Introducing backtracking</h2>
+
+<p>A backtracking algorithm is a way of computing a solution to a problem when constraints are known.</p>
+
+<p>Backtracking can be used to solve the Knapsack problem by trying out all possible combinations of items to include in the knapsack, and backtracking when the weight limit is exceeded or all items have been considered.</p>
+
+<p>This approach avoids the need to check every single subset of items, which would be inefficient. Instead, it only considers combinations of items that are valid up to a certain point, and <em>backtracks</em> when necessary.</p>
+
+<p><a href="https://github.com/Dev-Aligator/Backtracking-Research">For more detail check out our paper on backtracking.</a></p>
+
+
+    
+        <script src="/js/nQueens.js-bundle-e40eeedcfc22c145c450.js"></script>
+    
+
+    </section>
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script src="/js/polyfill.js-bundle-e40eeedcfc22c145c450.js"></script>
+<script src="/js/cover.ts-bundle-e40eeedcfc22c145c450.js"></script>
+<footer id="site-footer">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+    This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img style="float:right;" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+</footer>
+</body>
+</html>
