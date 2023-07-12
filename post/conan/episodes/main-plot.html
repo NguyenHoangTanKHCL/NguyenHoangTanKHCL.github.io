@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>N-Queens Problem Backtracking Demo</title>
+
+    
+    
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Quicksand" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/main-23344ecd.css" />
+    <link rel="stylesheet" type="text/css" href="css.css">
+
+    
+
+<meta name=viewport content="width=device-width, initial-scale=1">
+
+
+
+
+
+    
+</head>
+
+<nav class="fixed-nav-bar">
+<ul>
+    <li><a href="/">Home</a></li>
+    <li class="wide"></li>
+    <li><a href="/about/about.html">About</a></li>
+    <li><a href="/contact/contact.html">Contact</a></li>
+</ul>
+</nav>
+
+
+<body>
+<div id="cover-container">
+    <div id="front-cover" style="text-align: center;">
+        <h1>An episode guide to shorter expenditures into the Detective Conan.</h1>
+    </div>
+</div>
+
+    <section class="section-content">
+
+    
+
+    
+
+<p>Wanted to start watching detective conan but the amount of episodes are intimidating ? Here is your solution 
+
+    .</p>
+
+<p><div style="display:block; width:600px; height: 400px; margin:20px auto;" id="canvas-nqueens">
+  <img src="https://th.bing.com/th/id/R.238d032f0783056c1a6cfd4888516b98?rik=XvM6BycLCQWiWA&riu=http%3a%2f%2fimages4.fanpop.com%2fimage%2fphotos%2f23300000%2fDetective-Conan-detective-conan-23329184-1024-768.jpg&ehk=FQ2yEprwslUcs6LeahYPOCV9RdSK4%2b3T%2f2SKLSBkH4k%3d&risl=&pid=ImgRaw&r=0" height="400" width="600">
+</div>
+
+
+
+    
+<h1 id="n-queens-problem">Introduction</h1>
+
+<p>My girlfriend is really into the 26th Detective Conan movie, but she doesn't have enough knowledge of the overall story. She wants to watch all the episodes as quickly as possible, but she doesn't have enough time.</p>
+
+<p><div style="display:block; width:600px; height: 600px; margin:20px auto;" id="canvas-nqueens">
+    <img src="https://cdn.myanimelist.net/images/anime/1138/133101.jpg" height="600" width="600">
+  </div>
+  
+  
+
+<p>So, I have compiled a list of canon episodes that are actually significant as well as listed the reasons someone may believe them to be essential.  This is for the sake of those who might want to get into or try to convince a friend to get into Detective Conan for the story but find the insanely high episode count and 2-decade long history daunting. </p>
+
+<p>As hinted there, this is not a list of “must watch” episodes, but rather a list of episodes you may not want to miss depending on what aspects of the series you are trying to follow. The episodes labeled *Main Plot* are closer to that, but still not quite the same thing, because at least the occasional dose of character development here and there is “must watch” in its own way.</p>
+
+
+<h2 id="what-would-the-algorithm-do-without-backtracking">Stats</h2>
+
+
+<p>Included episodes: 478</p>
+
+
+<p>Total episodes so far: 1086</p>
+
+<p>Last updated: Webnesday, July 12, 2023</p>
+
+<h2 id="introducing-backtracking">Introducing backtracking</h2>
+
+<div class="tabContainer">
+    <div class="buttonContainer">
+        <button onclick="showPanel(0,'#f44336')">00s</button>
+        <button onclick="showPanel(1,'#4caf50')">100s</button>
+        <button onclick="showPanel(2,'#2196f3')">200s</button>
+        <button onclick="showPanel(3,'#ff5722')">300s</button>
+        <button onclick="showPanel(4,'#ff5722')">400s</button>
+        <button onclick="showPanel(5,'#f44336')">500s</button>
+        <button onclick="showPanel(6,'#4caf50')">600s</button>
+        <button onclick="showPanel(7,'#2196f3')">700s</button>
+        <button onclick="showPanel(8,'#ff5722')">800s</button>
+        <button onclick="showPanel(9,'#ff5722')">900s</button>
+        <button onclick="showPanel(10,'#ff5722')">1000s</button>
+        <button onclick="showPanel(11,'#ff5722')">Upc</button>
+
+
+    </div>
+    <div class="tabPanel" style="height: 400px;">
+        <p class="episode">1-2 (manga 1-5|V1F1-5): Initial setup. </p>
+        <p class="episode">7 (manga 26-29|V3F7-9): Main character development. </p>
+        <p class="episode">13 [INTL 14] (manga 13-16|V2F4-7*): Introduces Miyano Akemi </p>
+
+        <p class="episode">43 [INTL 44] (manga 49-51|V5F10-V6F1) </p>
+        <p class="episode">48-50 [INTL 49-51] (manga 92-98|V10F2-8): Introduces Hattori Heiji. </p>
+
+        <p class="episode">54 [INTL 56] (manga 114-116|V12F4-6): Some Black Organization stuff. </p>
+        <p class="episode">57-58 [INTL 59-60] (manga 117-121|V12F7-V13F1): Hattori Heiji major development. </p>
+
+
+
+    </div>
+    <div class="tabPanel" style="height: 400px">
+
+
+    <p class="episode">128 [INTL 135] (manga 13-16|V2F4-7*): “The Black Organization: One Billion Yen Robbery Case” *Main Plot* </p>
+
+    <p class="episode">129 [INTL 136-139] (manga 176-181|V18F6-V19F1): Introduces Haibara Ai, possibly the second most central character to the overall plot after Conan himself. (2 Hour Special) *Main Plot*</p>
+
+
+
+    <p class="episode">170-171 [INTL 181-182] (manga 234-237|V24F3-6): Introduces Araide Tomoaki. He doesn’t really do much for now, but he becomes extremely important later on. *Main Plot*</p>
+
+
+    <p class="episode">176-178 [INTL 190-192] (manga 238-242|V24F7-11): “Reunion with the Black Organization” *Main Plot*</p>
+
+
+    <p class="episode">188-193 [INTL 203-208] (manga 251-260|V25F9-V26F7): “The Desperate Revival” *Main Plot*</p>
+    </div>
+    <div class="tabPanel" style="height: 800px;">
+        <p class="episode">219 [INTL 235-238] (manga MK23-24|V4C3-4 & DC299-302|V30F4-7): Kaitō Kid. Also some background stuff that will be important later on. (2 Hour Special) *Main Plot*</p>
+
+
+
+<p class="episode">226-227 [INTL 245-246] (manga 270-272|V27F7-9): Introduces Jodie Saintemillion. *Main Plot*</p>
+
+<p class="episode">230-231 [INTL 249-250] (manga 287-289|V29F3-5): Introduces Akai Shūichi—AKA Badass Incarnate—gives Jodie-sensei and Araide-sensei development, and some Black Organization on the side. *Main Plot*</p>
+
+
+
+
+
+
+<p class="episode">253-254 [INTL 272-273] (manga 328-330|V32F11-V33F2): “Metropolitan Police Detective Love Story 4” *Main Plot*</p>
+
+<p class="episode">258-259 [INTL 277-278] (manga 325-327|V32F8-10): Introduces James Black. Also, some Shūichi development. *Main Plot*</p>
+
+
+<p class="episode">266-268 [INTL 288-290] (manga 331-334|V33F3-6): Some Makoto development. Plus more Shūichi. *Main Plot*</p>
+
+<p class="episode">269-272 [INTL 291-294] (manga 335-340|V33F7-V34F1): Some Black Organization info and some Jodie development. Also, more Shūichi. *Main Plot*</p>
+
+<p class="episode">277-278 [INTL 299-300] (manga 341-343|V34F2-4*): Lots of Heiji and Jodie. *Main Plot*</p>
+
+
+<p class="episode">279-280 [INTL 301-302] (manga 344-346|V34F5-7): Haibara development and some Black Organization clues. *Main Plot*</p>
+
+<p class="episode">284-285 [INTL 306-307] (manga 347-349|V34F8-10): More Shūichi. *Main Plot*</p>
+
+<p class="episode">286-288 [INTL 308-310] (manga 350-354|V34F11-V35F4): “Kudō Shinichi’s New York Case”—Extremely important Shūichi, among other things. *Main Plot*</p>
+
+<p class="episode">289-290 [INTL 311-312] (manga 358-360|V35F8-10): Some Black Organization info. *Main Plot*</p>
+
+    </div>
+    <div class="tabPanel" style="height: 600px;">
+
+<p class="episode">307-308 [INTL 332-333] (manga 377-379|V37F5-7): Buildup. *Main Plot*</p>
+
+<p class="episode">309-311 [INTL 334-336] (manga 380-383|V37F8-V38F1): “Contact with the Black Organization” *Main Plot*</p>
+
+<p class="episode">312-313 [INTL 337-338] (manga 384-386|V38F2-4): Followup, Haibara development, and Black Organization backstory. *Main Plot*</p>
+
+
+
+
+<p class="episode">335-336 [INTL 360-361] (manga 417-419|V41F4-6): Yukiko development and even more Shūichi. *Main Plot*</p>
+
+<p class="episode">338-339 [INTL 363-364] (manga 420-422|V41F7-9): Haibara, Shūichi, Jodie, and Araide development. *Main Plot*</p>
+
+<p class="episode">340-341 [INTL 365-366] (manga 423-425|V41F10-V42F1): Haibara development. *Main Plot*</p>
+
+<p class="episode">343-344 [INTL 369-370] (manga 426-428|V42F2-4): Jodie and Ran development. *Main Plot*</p>
+
+<p class="episode">345 [INTL 371-375] (manga 429-434|V42F5-10): “Head-to-Head Match with the Black Organization: A Dual Mystery on a Full Moon Night” (2.5 Hour Special) *Main Plot*</p>
+
+
+
+
+
+<p class="episode">361-362 [INTL 392-393] (manga 457-459|V44F11-V45F2): Jodie and Araide development. *Main Plot*</p>
+
+
+<p class="episode">385-387 [INTL 419-421] (manga 470-474|V46F2-6): Black Organization info. *Main Plot*</p>
+
+
+
+    </div>
+    <div class="tabPanel" style="height: 400px;">
+        <p class=episode>400 [INTL 434] (manga 483|V47F4): Major character development. *Main Plot*
+
+
+
+<p class=episode>425 [INTL 459-463] (manga 499-504|V48F9-V49F4): “Black Impact! The Moment the Black Organization Reaches Out” (2.5 Hour Special) *Main Plot*
+
+<p class=episode>429-430 [INTL 467-468] (manga 508-510|V49F8-10): Introduces Hondō Eisuke. *Main Plot*
+
+
+
+
+
+<p class=episode>462-465 [INTL 502-505] (manga 550-555|V53F7-V54F2): “The Shadow of the Black Organization” *Main Plot*
+
+
+
+
+
+<p class=episode>484-485 [INTL 527-528] (manga 582-584|V56F7-9): Eisuke development. *Main Plot*
+
+
+    </div>
+
+    <div class="tabPanel" style="height: 500px;">
+        <p class="episode">491-504 [INTL 538-551] (manga 585-590,595-609|V56F10-V57F4,V57F9-V59F1): “Clash of Red and Black”—By far the longest Black Organization arc to date. *Main Plot*
+
+
+<p class="episode">507-508 [INTL 554-555] (manga 619-621V59F11-V60F2): Eisuke development. *Main Plot*
+
+<p class="episode">509-511 [INTL 556-558] (manga 622-624,638-640|V60F3-5,V61F8-10): Introduces Okiya Subaru (awesome to the max). Also, some Black Organization info. *Main Plot*
+
+
+
+
+
+<p class="episode">521-525 [INTL 570-576] (manga 635-637,646-654|V61F5-7,V62F5-V63F2): Shinichi case. Major development for the main characters, and Heiji is part of it this time. (521 and 522 are 1 Hour Specials) *Main Plot*
+
+
+
+<p class="episode">542-543 [INTL 593-594] (manga 664-666|V64F1-3): Subaru development. *Main Plot*
+
+
+<p class="episode">563-564 [INTL 614-615] (manga 677-679|V65F3-5): Big FBI and Black Organization goings on. *Main Plot*
+
+
+
+
+<p class="episode">578-581 [INTL 629-632] (manga 699-704|V67F3-8): Subaru and Jodie development, and some Black Organization activity. *Main Plot*
+
+
+
+
+    </div>
+
+    <div class="tabPanel" style="height: 800px;">
+
+        
+        <p class="episode">616-621 [INTL 667-672] (manga 743-752|V71F3-V72F1): “Holmes’ Revelation”—Major development for the main characters. *Main Plot*
+        
+        
+        
+        <p class="episode">622-623 [INTL 673-674] (manga 753-755|V72F2-4): Haibara and Subaru development. *Main Plot*
+
+
+
+
+<p class="episode">646-647 [INTL 697-698] (manga 768-770|V73F6-8): Introduces Sera Masumi. *Main Plot*
+
+<p class="episode">648-650 [INTL 699-701] (manga 771-774|V73F9-V74F1): Sera development. *Main Plot*
+
+
+<p class="episode">651 [INTL 702-703] (manga 778-780|V74F5-7): Heiji case. Also some Sera development. (1 Hour Special) *Main Plot*
+
+
+<p class="episode">656-657 [INTL 708-709] (manga 775-777|V74F2-4): Sera and Subaru development. *Main Plot*
+
+
+<p class="episode">667-668 [INTL 719-720] (manga 793-795|V75F9-11): Introduces Amuro Tōru. *Main Plot*
+
+<p class="episode">671-674 [INTL 723-726] (manga 796-800|V76F1-5): “Detectives’ Nocturne”—Major development for Subaru, Sera, and Amuro, and some Black Organization. *Main Plot*
+
+<p class="episode">675-676 [INTL 727-728] (manga 801-803|V76F6-8): Some mild Sera development and Black Organization buildup. *Main Plot*
+
+<p class="episode">681-683 [INTL 733-735] (manga 804-808|V76F9-V77F2): “The Life-Threatening Broadcast of Love”—Major development for Satō and Takagi and lesser development for Sera and Amuro. *Main Plot*
+
+<p class="episode">684-685 [INTL 736-737] (manga 809-811|V77F3-5): Haibara and Subaru development. *Main Plot*
+
+<p class="episode">690-691 [INTL 742-743] (manga 812-814|V77F6-8): Subaru, Sera, and Conan’s dad development. *Main Plot*
+
+
+    </div>
+
+    <div class="tabPanel" style="height: 1200px;">
+        <p class="episode">699-700 [INTL 751-752] (manga 815-817|V77F9-11): Haibara and Sera development with a bit of important Subaru and Amuro. Build up for the following big event. *Main Plot*
+
+<p class="episode">701-704 [INTL 753-756] (manga 818-824|V78F1-7): “The Pitch Black Mystery Train”—Big Black Organization event AND Kaitō Kid at the same time. If that is somehow in some universe not enough for you, it has important development of varying degrees for Haibara, Conan’s mom, Shūichi, Subaru, Sera, and Amuro. *Main Plot*
+
+<p class="episode">705-706 [INTL 757-758] (manga 825-827|V78F8-10): Some followup with some plan details and Amuro. *Main Plot*
+
+
+<p class="episode">722-723 [INTL 774-775] (manga 841-843|V80F2-4): A bit of Amuro and Subaru development. *Main Plot*
+
+
+<p class="episode">727-728 [INTL 779-780] (manga 844-846|V80F5-7): Slight Sera development. *Main Plot*
+
+<p class="episode">731-732 [INTL 783-784] (manga 847-849|V80F8-10): Introduces Haneda Shūkichi, a bit of development for Yumi, and a tiny bit of Chiba and Miike. *Main Plot*
+
+<p class="episode">734 [INTL 786-787] (manga 850-852|V80F11-V81F2): Some Black Organization with a bit of Jodie development. (1 Hour Special) *Main Plot*
+
+
+
+<p class="episode">744-745 [INTL 797-798] (manga 859-861|V81F9-11): Some Makoto and significant Sera development. *Main Plot*
+
+
+
+<p class="episode">754-756 [INTL 807-809] (manga 872-875|V82F11-V83F3): Sera development and introduces Sera’s sister from outside the territory. *Main Plot*
+
+<p class="episode">759-760 [INTL 812-813] (manga 876-878|V83F4-6): Sera and Sera’s outside sister development. *Main Plot*
+
+
+<p class="episode">770-771 [INTL 823-824] (manga 888-890|V84F6-8): Amuro development. *Main Plot*
+
+
+<p class="episode">779-783 [INTL 832-836] (manga 891-898|V84F9-V85F5): The “Scarlet” series. A Black Organization-related series with big development for Amuro, Subaru, and basically all of the FBI characters of any significance. *Main Plot*
+
+
+<p class="episode">785-786 [INTL 838-839] (manga 899-902|V85F6-9): Haneda Shūkichi and Yumi development, plus a bit of Subaru and Sera’s outside sister. *Main Plot*
+
+<p class="episode">787-788 [INTL 840-841] (manga 903-905|V85F10-V86F1): Some Sera and Sera’s outside sister development. *Main Plot*
+
+<p class="episode">792-793 [INTL 845-846] (manga 906-908|V86F2-4): Some Black Organization info. *Main Plot*
+
+    </div>
+
+    <div class="tabPanel" style="height: 700px;">
+
+
+<p class="episode"> [INTL 865-867] (manga 913-917|V86F9-V87F2): Introduces Kuroda Hyōe, plus some development for Yamato, Uehara, and Morofushi. *Main Plot*
+
+
+
+
+<p class="episode">827-828 [INTL 882-883] (manga 928-930|V88F2-4): Sera, Shūkichi, and Sera’s outside sister development. *Main Plot*
+
+
+<p class="episode">36-837 [INTL 891-892] (manga 936-938|V88F10-V89F1): Amuro, Sera, and Shūichi development. *Main Plot*
+
+
+
+<p class="episode">849-850 [INTL 904-905] (manga 945-947|V89F8-10): Yumi development, plus contains some really important background on Haneda Shūkichi if you look really closely. Also relevant to Shūichi. *Main Plot*
+
+
+<p class="episode">861-864,866,867 [INTL 916-919,921,922] (manga 948-957|V89F11-V90F9): Black Organization setup with some Subaru, Amuro, Sera, and Sera’s outside sister development. *Main Plot*
+
+
+
+<p class="episode">878-879 [INTL 933-934] (manga 969-971|V91F10-V92F1): Sera development. *Main Plot*
+
+<p class="episode">881-882 [INTL 936-937] (manga 972-974|V92F2-4): Shinichi case, with development for Sera, Shūichi, et al. *Main Plot*
+
+
+
+<p class="episode">889-890 [INTL 944-945] (manga 966-968|V91F7-9): Introduces Wakasa Rumi. *Main Plot*
+
+<p class="episode">894-895 [INTL 949-950] (manga 975-977|V92F5-7): Introduces Wakita Kanenori. *Main Plot*
+
+<p class="episode">896-897 [INTL 951-952] (manga 978-980|V92F8-10): Rumi-sensei development. *Main Plot*
+    </div>
+
+    <div class="tabPanel" style="height: 550px;">
+        <p class="episode"> [INTL 964-965] (manga 987-989|V93F6-8): Kuroda and Rumi-sensei development. *Main Plot*
+
+
+
+<p class="episode">927-928 [INTL 982-985] (manga 1000-1005|V94F8-V95F2): “Scarlet School Trip”—Shinichi case. Main character development. Also some Sera Masumi and Mary development. (Both 1 Hour Specials) *Main Plot*
+
+<p class="episode">941-942 [INTL 998-999] (manga 1006-1008|V95F3-5): Followup from the previous case. Some slight Kuroda, Rumi-sensei, and Wakita development. Black Organization development. *Main Plot*
+
+
+<p class="episode">952-954 [INTL 1009-1011] (manga 1009-1012|V95F6-9): Amuro development. *Main Plot*
+
+<p class="episode">971-974 [INTL 1028-1031] (manga 1013-1017|V95F10-V96F3): Detective Chiba and Miike development. Kuroda development. Amuro development. Plus a development for Yumi and Shūkichi in the background. *Main Plot*
+
+<p class="episode">983-984 [INTL 1040-1041] (manga 1018-1021|V96F4-7): Heiji case, Kaitō Kid, Morofushi development, Amuro development, and Hiromitsu development. *Main Plot*
+
+<p class="episode">993-995 [INTL 1050-1052] (manga 1022-1026|V96F8-V97F1): Sera Masumi development. Also, Makoto is around. *Main Plot*
+    </div>
+
+    <div class="tabPanel" style="height: 500px;">
+
+
+<p class="episode">1011-1012 [INTL 1068-1069] (manga 1032-1034|V97F7-9): Rumi-sensei development. *Main Plot*
+
+<p class="episode">1018-1020 [INTL 1075-1077] (manga 1035-1038|V97F10-V98F2): Subaru, Sera Masumi and Mary development. *Main Plot*
+
+<p class="episode">1024-1025 [INTL 1081-1082] (manga 1039-1042|V98F3-6): Heiji case. Haneda Kōji development. *Main Plot*
+
+
+<p class="episode">1045-1046 [INTL 1102-1103] (manga 1047-1050|V98F11-V99F3): Sera Masumi and Mary development and some Black Organization. *Main Plot*
+
+<p class="episode">1053-1054 [INTL 1110-1111] (manga 1051-1054|V99F4-7): Rumi development. *Main Plot*
+
+<p class="episode">1059-1060 [INTL 1116-1117] (manga 1055-1057|V99F8-10): Wakita development. *Main Plot*
+
+<p class="episode">1071-1072 [INTL 1128-1129] (manga 1058-1060|V99F11-V100F2): Kaitō Kid. *Main Plot*
+
+<p class="episode">1077-1079 [INTL 1134-1136] (manga 1061-1066|V100F3-8): “The Black Organization’s Scheme” *Main Plot*
+
+    </div>
+
+    <div class="tabPanel" style="height: 450px;">
+        <p class="episode">Miyano Akemi’s Time Capsule (manga 1070-1072|V101F1-3): Haibara and Rumi development. *Main Plot*
+
+
+
+
+
+<p class="episode">Detective Play Director Murder Case (manga 1088-1090|V102F8-10): Heiji case. Kuroda development. *Main Plot*
+
+
+<p class="episode">Serial Hotel Bombing Case (manga 1094-1096|V103F3-5): Sera Masumi and Mary development. Some Black Organization buildup. *Main Plot*
+
+<p class="episode">Beach House Murder Case (manga 1097-1099|V103F6-8): Rumi development. *Main Plot*
+
+<p class="episode">Kaitō Kid and the Siren’s Splash (manga 1100-1102|V103F9-11): Kaitō Kid. Wakita development. *Main Plot*
+
+<p class="episode">Chess Tournament Murder Case (manga 1103-1105|V104F1-3): Kuroda, Rumi, and Wakita development. *Main Plot*
+    </div>
+</div>
+
+
+
+
+
+
+
+    </section>
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+<script src="/js/polyfill.js-bundle-e40eeedcfc22c145c450.js"></script>
+<script src="/js/cover.ts-bundle-e40eeedcfc22c145c450.js"></script>
+<div id="site-footer">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+    This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img style="float:right;" alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+</div>
+
+<script src="myScript.js"></script>
+
+</body>
+</html>
